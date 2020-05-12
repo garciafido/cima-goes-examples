@@ -1,6 +1,6 @@
-########################
-# Define GOES 16 Product
-########################
+###############################
+# Define a GOES 16 Product Band
+###############################
 
 from cima.goes import ProductBand, Product, Band
 
