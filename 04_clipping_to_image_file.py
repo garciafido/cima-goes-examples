@@ -71,5 +71,5 @@ for blob in blobs():
     nfs.upload_stream(image_stream, filename)
 
     # Show progress
-    print(f'Region: {dataset_region.region}, Shape: {lats.shape}')
+    print(f'Region: {dataset_region.region}, Source data shape: {lats.shape}')
     print(f'saved as {filename}')
