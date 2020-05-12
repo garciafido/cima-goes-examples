@@ -22,6 +22,7 @@ product_bands = [
     ProductBand(Product.CMIPF, Band.RED),
     ProductBand(Product.CMIPF, Band.CLEAN_LONGWAVE_WINDOW),
     ProductBand(Product.CMIPF, Band.BLUE),
+    ProductBand(Product.RadF, Band.RED),
 ]
 
 #############################

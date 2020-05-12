@@ -9,6 +9,7 @@ from cima.goes import ProductBand, Product, Band
 gcs = GCS(credentials_as_dict=credentials)
 
 
+# Download blobs
 def blobs():
     product_band = ProductBand(
         product=Product.CMIPF,              # Cloud and Moisture Image Product – Full Disk
