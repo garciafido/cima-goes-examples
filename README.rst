@@ -31,4 +31,6 @@ Installation with Git / Anaconda
 Obtaining GCP Credentials
 -------------------------
 
+Replace the contents of the gcs_credentials.py file with your credentials
+
 https://cloud.google.com/docs/authentication/production#obtaining_and_providing_service_account_credentials_manually

@@ -4,7 +4,7 @@ from cima.goes.tiles import load_region_data, get_dataset_region, get_data, get_
 from cima.goes.storage import NFS
 from gcs_credentials import credentials
 from cima.goes import ProductBand, Product, Band
-from cima.goes.img import get_image_stream, stream2pil, CLOUD_TOPS_PALETTE
+from cima.goes.img import get_image_stream
 
 
 # Create Google Cloud Storage object
@@ -62,6 +62,8 @@ for blob in blobs():
         lons=lons,
         format=format,
         region=dataset_region.region,
+        projection=None,
+        draw_cultural=True,
         vmin=0,
         vmax=0.7,
         cmap='gray')
