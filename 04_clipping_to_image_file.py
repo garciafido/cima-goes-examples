@@ -62,7 +62,6 @@ for blob in blobs():
         lons=lons,
         format=format,
         region=dataset_region.region,
-        projection=None,
         draw_cultural=True,
         vmin=0,
         vmax=0.7,
