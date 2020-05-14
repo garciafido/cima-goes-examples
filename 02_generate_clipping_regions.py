@@ -11,6 +11,12 @@ region = LatLonRegion(
     lon_east=-45,
 )
 
+small_region = LatLonRegion(
+    lat_south=-30,
+    lat_north=-20,
+    lon_west=-60,
+    lon_east=-50,
+)
 
 ##############################
 # Define GOES 16 Product Bands
@@ -20,8 +26,9 @@ from cima.goes import ProductBand, Product, Band
 
 product_bands = [
     ProductBand(Product.CMIPF, Band.RED),
-    ProductBand(Product.CMIPF, Band.CLEAN_LONGWAVE_WINDOW),
+    ProductBand(Product.CMIPF, Band.VEGGIE),
     ProductBand(Product.CMIPF, Band.BLUE),
+    ProductBand(Product.CMIPF, Band.CLEAN_LONGWAVE_WINDOW),
     ProductBand(Product.RadF, Band.RED),
 ]
 
@@ -42,7 +49,7 @@ gcs = GCS(credentials_as_dict=credentials)
 from cima.goes.tiles import generate_region_data
 
 # This process can take a long time
-region_data = generate_region_data(gcs, region, product_bands)
+region_data = generate_region_data(gcs, small_region, product_bands)
 
 
 #########################
@@ -53,4 +60,4 @@ from cima.goes.tiles import save_region_data
 from cima.goes.storage import NFS
 
 # Saving the file to the network file storage (NFS) in the current directory
-save_region_data(region_data, NFS(), 'my_regions.json')
+save_region_data(region_data, NFS(), 'my_small_regions.json')

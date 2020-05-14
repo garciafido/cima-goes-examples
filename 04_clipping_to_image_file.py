@@ -4,7 +4,8 @@ from cima.goes.tiles import load_region_data, get_dataset_region, get_data, get_
 from cima.goes.storage import NFS
 from gcs_credentials import credentials
 from cima.goes import ProductBand, Product, Band
-from cima.goes.img import get_image_stream
+from cima.goes.img import get_image_stream, apply_albedo
+import cartopy.crs as ccrs
 
 
 # Create Google Cloud Storage object
@@ -24,12 +25,6 @@ def blobs():
     hour = 15
 
     return gcs.one_hour_blobs(year=year, month=month, day=day, hour=hour, product_band=product_band).blobs
-
-
-def apply_albedo(data):
-    albedo = (data * np.pi * 0.3) / 663.274497
-    albedo = np.clip(albedo, 0, 1)
-    return np.power(albedo, 1.5)
 
 
 def apply_ir(data):
@@ -54,6 +49,8 @@ for blob in blobs():
     lats, lons = get_lats_lons(dataset, dataset_region.indexes)
     data = apply_albedo(get_data(dataset, dataset_region.indexes))
 
+    sat = dataset_region.sat_band_key
+
     # Get image
     format = 'png'
     image_stream = get_image_stream(
@@ -62,6 +59,11 @@ for blob in blobs():
         lons=lons,
         format=format,
         region=dataset_region.region,
+        projection=ccrs.Geostationary(
+            central_longitude=sat.sat_lon,
+            satellite_height=sat.sat_height,
+            sweep_axis=sat.sat_sweep
+        ),
         draw_cultural=True,
         vmin=0,
         vmax=0.7,
