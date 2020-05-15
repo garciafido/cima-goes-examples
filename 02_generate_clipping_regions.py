@@ -37,9 +37,8 @@ product_bands = [
 #############################
 
 from cima.goes.storage import GCS
-from gcs_credentials import credentials
 
-gcs = GCS(credentials_as_dict=credentials)
+gcs = GCS()
 
 
 ########################################

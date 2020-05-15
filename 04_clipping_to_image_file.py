@@ -2,14 +2,13 @@ import numpy as np
 from cima.goes.storage import GCS
 from cima.goes.tiles import load_region_data, get_dataset_region, get_data, get_lats_lons
 from cima.goes.storage import NFS
-from gcs_credentials import credentials
 from cima.goes import ProductBand, Product, Band
 from cima.goes.img import get_image_stream, apply_albedo
 import cartopy.crs as ccrs
 
 
 # Create Google Cloud Storage object
-gcs = GCS(credentials_as_dict=credentials)
+gcs = GCS()
 nfs = NFS()
 
 

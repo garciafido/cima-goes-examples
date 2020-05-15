@@ -1,14 +1,13 @@
 from cima.goes.storage import GCS
 from cima.goes.tiles import load_region_data, get_data, get_dataset_key, get_dataset_region
 from cima.goes.storage import NFS
-from gcs_credentials import credentials
 from cima.goes import ProductBand, Product, Band
 from cima.goes.img import get_true_colors, get_image_inches, apply_albedo
 import matplotlib.pyplot as plt
 import cartopy.crs as ccrs
 
 
-gcs = GCS(credentials_as_dict=credentials)
+gcs = GCS()
 nfs = NFS()
 
 year = 2020
@@ -71,6 +70,25 @@ def gray_clip():
     return apply_albedo(get_data(dataset, dataset_region.indexes))
 
 
+def lambert(img, geos, extent, filename):
+    fig = plt.figure(frameon=False)
+    image_inches = get_image_inches(img)
+
+    # Generate an Cartopy projection
+    lc = ccrs.LambertConformal(central_longitude=-97.5, standard_parallels=(38.5, 38.5))
+
+    ax = fig.add_subplot(1, 1, 1, projection=lc)
+    ax.set_extent([-135, -60, 10, 65], crs=ccrs.PlateCarree())
+
+    ax.imshow(img, origin='upper',
+              extent=extent,
+              transform=geos,
+              interpolation='none')
+    # ax.coastlines(resolution='50m', color='black', linewidth=0.5)
+    # ax.add_feature(ccrs.cartopy.feature.STATES, linewidth=0.5)
+    plt.savefig(filename, format='png', dpi=image_inches.dpi, bbox_inches='tight', pad_inches=0)
+
+
 def save(img, filename, **kwargs):
     fig = plt.figure(frameon=False)
     image_inches = get_image_inches(img)
@@ -89,6 +107,7 @@ geos = ccrs.Geostationary(
     satellite_height=sat_band_key.sat_height,
     sweep_axis=sat_band_key.sat_sweep
 )
-save(rgb_data(dataset), f'CLIP_RGB.png')
+lambert(rgb_data(dataset), geos, extent, f'LAMBERT_RGB.png')
+# save(rgb_data(dataset), f'CLIP_RGB.png')
 # save(gray_clip(), f'CLIP_GRAY.png', vmin=0, vmax=0.7, cmap='gray')
 # save(gray_data(), f'ALL_GRAY.png', vmin=0, vmax=0.7, cmap='gray')
