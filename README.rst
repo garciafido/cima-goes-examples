@@ -27,10 +27,3 @@ Installation with Git / Anaconda
     $ python 01_blob_to_netcdf_file.py
     $ python 03_clipping_to_netcdf_file.py
     $ python 04_clipping_to_image_file.py
-
-Obtaining GCP Credentials
--------------------------
-
-Replace the contents of the gcs_credentials.py file with your credentials
-
-https://cloud.google.com/docs/authentication/production#obtaining_and_providing_service_account_credentials_manually
