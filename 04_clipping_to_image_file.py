@@ -1,7 +1,6 @@
-import numpy as np
 from cima.goes.storage import GCS
-from cima.goes.tiles import load_region_data, get_dataset_region, get_data, get_lats_lons
 from cima.goes.storage import NFS
+from cima.goes.tiles import load_region_data, get_dataset_region, get_data, get_lats_lons
 from cima.goes import ProductBand, Product, Band
 from cima.goes.img import get_image_stream, apply_albedo
 import cartopy.crs as ccrs
@@ -9,6 +8,9 @@ import cartopy.crs as ccrs
 
 # Create Google Cloud Storage object
 gcs = GCS()
+
+
+# Create Network File System Storage object
 nfs = NFS()
 
 

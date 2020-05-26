@@ -32,23 +32,15 @@ product_bands = [
     ProductBand(Product.RadF, Band.RED),
 ]
 
-#############################
-# Define Google Cloud Storage
-#############################
-
-from cima.goes.storage import GCS
-
-gcs = GCS()
-
-
 ########################################
 # Generate region data for product bands
 ########################################
 
+from cima.goes.storage import GCS
 from cima.goes.tiles import generate_region_data
 
 # This process can take a long time
-region_data = generate_region_data(gcs, small_region, product_bands)
+region_data = generate_region_data(GCS(), small_region, product_bands)
 
 
 #########################
