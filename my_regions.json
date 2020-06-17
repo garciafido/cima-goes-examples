@@ -18,7 +18,8 @@
       "x_max": 18725,
       "y_min": 14930,
       "y_max": 19290
-    }
+    },
+    "spatial_resolution": 2
   },
   "35786023.0#-89.5#x#5424#5424": {
     "sat_band_key": {
@@ -39,7 +40,8 @@
       "x_max": 4681,
       "y_min": 3732,
       "y_max": 4822
-    }
+    },
+    "spatial_resolution": 2
   },
   "35786023.0#-89.5#x#10848#10848": {
     "sat_band_key": {
@@ -60,7 +62,8 @@
       "x_max": 9362,
       "y_min": 7465,
       "y_max": 9644
-    }
+    },
+    "spatial_resolution": 2
   },
   "35786023.0#-75.0#x#21696#21696": {
     "sat_band_key": {
@@ -81,7 +84,8 @@
       "x_max": 16617,
       "y_min": 15031,
       "y_max": 19322
-    }
+    },
+    "spatial_resolution": 2
   },
   "35786023.0#-75.0#x#5424#5424": {
     "sat_band_key": {
@@ -102,7 +106,8 @@
       "x_max": 4154,
       "y_min": 3757,
       "y_max": 4830
-    }
+    },
+    "spatial_resolution": 2
   },
   "35786023.0#-75.0#x#10848#10848": {
     "sat_band_key": {
@@ -123,6 +128,7 @@
       "x_max": 8308,
       "y_min": 7515,
       "y_max": 9661
-    }
+    },
+    "spatial_resolution": 2
   }
 }
