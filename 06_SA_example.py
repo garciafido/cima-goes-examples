@@ -1,10 +1,11 @@
 import os
-
+import datetime
+import numpy as np
+from netCDF4 import Dataset
 from cima.goes.tiles import LatLonRegion, generate_region_data, DatasetRegion, SatBandKey, RegionIndexes, copy_variable
 from cima.goes.storage import GCS
 from cima.goes import ProductBand, Product, Band
-from netCDF4 import Dataset
-import numpy as np
+from cima.goes.projects import DatesRange, HoursRange, BatchProcess
 
 gcs = GCS()
 
@@ -84,7 +85,7 @@ def set_info_variables(dataset, rdata):
     if int(rdata.sat_band_key.sat_lon) == -89:
         dataset.summary = 'This file contains the latitude - longitude grids, corresponding to the period between 07/10/2017 and 11/30/2017, where GOES16 was in the position 89.3 degrees west. The grid was cropped within the area of South America delimited approximately by latitude 15.7°N and 53.9°S; longitude 81.4°W and 34.7°W.'
     elif int(rdata.sat_band_key.sat_lon) == -75:
-        dataset.summary = 'This file contains the latitude - longitude corresponding grids from 12/14/2017. GOES-16 reached 75.2 degrees west on December 11, 2017 and data flow resumed to users on December 14. The grid was cropped within the area of South America delimited approximately by latitude 15.7°N and 53.9°S; longitude 81.4°W and 34.7°W.'
+        dataset.summary = 'This file contains the latitude - longitude grids, corresponding from 12/14/2017 where GOES-16 reached 75.2 degrees west on December 11, 2017 and data flow resumed to users on December 14. The grid was cropped within the area of South America delimited approximately by latitude 15.7°N and 53.9°S; longitude 81.4°W and 34.7°W.'
 
     set_institutional_data(dataset)
 
@@ -217,6 +218,17 @@ def save_SA_netcdf(info_dataset, source_dataset):
         extract_variables(new_dataset, info_dataset, source_dataset)
     finally:
         new_dataset.close()
+
+
+def get_date_ranges():
+    all_hours = HoursRange(0, 23)
+    first = datetime.date(2017, 7, 11)
+    last = datetime.date(2017, 11, 30)
+    range_1 = DatesRange(first, last, [all_hours], 'orbita_provisoria')
+    first = datetime.date(2017, 12, 15)
+    last = datetime.date.today()
+    range_2 = DatesRange(first, last, [all_hours], 'orbita_actual')
+    return [range_1, range_2]
 
 
 def run ():
